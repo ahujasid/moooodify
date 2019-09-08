@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<head>
+    <title>mooodify - Music for any feel</title>
+    <link rel="stylesheet" href="https://use.typekit.net/ydp3etu.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="sendRequest.js"></script>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <link rel="stylesheet" type="text/css" href="app-mobile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','GTM-MJPMDPZ');</script>
+                <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-81723672-4"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-81723672-4');
+        </script>
+
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJPMDPZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+   <div class = "container">
+
+        <div class = "intro-container">
+
+                <div class = "logo"><img src = "assets/moodify-logo-min.png"></div>
+                 <div class = "intro-description">Create Spotify playlists out of your recently played tracks based on your mood</div>
+        
+        </div>
+       
+        <div class = "cards-flex">
+
+        <div class = "flex-col">
+
+            
+            <div class = "card" id= "happy">
+                    <h1>uplifting <img src = "assets/happy-emoji-min.png"></h1>
+                    <div class = "track-list" id = "track-list-happy">
+                            <div id = "happy-empty-state" class = "empty-state">Nothing to show here</div>
+                    </div>
+                    <button onclick="getuserIDHappy();" id="happy-button">Save as playlist</button>
+            </div>
+            
+
+            <div class = "card" id= "party">
+                <h1>partayyy <img src = "assets/dance-emoji-min.png"></h1>
+                    <div class = "track-list" id = "track-list-party">
+                            <div id = "party-empty-state" class = "empty-state">Nothing to show here</div>
+                    </div>
+
+                        
+                <button id="party-button" onclick="getuserIDParty(); ">Save as playlist</button>
+            </div>
+        </div>
+
+
+        
+
+    <div class = "flex-col">
+
+            <div class = "card" id= "custom">
+                    <h1>have a different mood? 
+                        <!-- <img src = "assets/gear-emoji-min.png"> -->
+                    </h1>
+
+                        <div class = "sliders mt">
+                            <h2>mood</h2>
+                            <div class = "slider-container"><img src = "assets/sad-emoji-min.png"><input type="range" min="10" max="90" value="50" class="slider" id="mood-slider"><img src = "assets/happy-emoji-min.png"></div>
+                            <h2>danceability</h2>
+                            <div class = "slider-container"><img src = "assets/book-emoji-min.png"><input type="range" min="10" max="90" value="50" class="slider" id="dance-slider"><img src = "assets/dance-emoji-min.png"></div>
+                            <h2>intensity</h2>
+                            <div class = "slider-container"><img src = "assets/sleep-emoji-min.png"><input type="range" min="10" max="90" value="50" class="slider" id="energy-slider"><img src = "assets/high-energy-emoji-min.png"></div>
+                        </div>
+                        <button class = "secondary" onclick="getCustomTracks();">Apply mood</button>
+
+                        <div class = "track-list" id = "track-list-custom">
+                                <div id = "custom-empty-state" class = "empty-state">Apply the moods to see which songs fit your mood</div>
+                        </div>
+                         <button id = "custom-button" onclick="getuserIDCustom(); ">Save as playlist</button>
+            </div>
+           
+            <div class = "card" id= "aggressive">
+                    <h1>high energy <img src = "assets/high-energy-emoji-min.png"></h1>
+                        <div class = "track-list" id = "track-list-aggressive">
+                                <div id = "aggressive-empty-state" class = "empty-state">Nothing to show here</div>
+                        </div>
+                         <button id="aggressive-button" onclick="getuserIDAggressive();">Save as playlist</button>
+            </div>
+    </div>
+
+
+
+    <div class = "flex-col last-col">    
+
+
+       
+
+            <div class = "card" id= "sad">
+                    <h1>downers <img src = "assets/sad-emoji-min.png"></h1>
+    
+                    <div class = "track-list" id = "track-list-sad">
+                        <div id = "sad-empty-state" class = "empty-state">Nothing to show here</div>
+                    </div>
+                    
+                     <button id="sad-button" onclick="getuserIDSad();">Save as playlist</button>
+                    
+            </div>
+
+            <div class = "card" id= "chill">
+                    <h1>relaxing <img src = "assets/chill-emoji-min.png"></h1>
+                        <div class = "track-list" id = "track-list-chill">
+                                <div id = "chill-empty-state" class = "empty-state">Nothing to show here</div>
+                        </div>
+                       
+                         <button id="chill-button" onclick="getuserIDChill();">Save as playlist</button>
+            </div>
+    </div>
+    
+
+</div>
+
+    <div class = "footer">
+            Created by <a href = "https://www.twitter.com/smackmypixelsup" target = "_blank" id="footer-link">Siddharth</a>. Reach out at ahujasid@gmail.com
+    </div>
+    
+    <div id = "snackbar"><img src = "assets/party-emoji-min.png">  Playlist saved. View it on Spotify!</div>
+
+</div>
+
+    
+</body>

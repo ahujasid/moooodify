@@ -1,0 +1,407 @@
+a{
+    color: #575359;
+    text-decoration: underline;
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+a:hover{
+    color: #7400D3;
+}
+
+.mt{
+    margin-top: 24px;
+}
+
+h1{
+    font-family: sofia-pro, sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #7400D3;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E9E9E9;
+    line-height: 1.2;
+}
+
+h2{
+    font-family: sofia-pro, sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: #7400D3;
+    padding-bottom: 8px;
+    line-height: 1.2;
+}
+
+h1 img{
+    width: 32px;
+    height: auto;
+    position: relative;
+    top: 4px;
+}
+
+body{
+    background-color: #FAF3FF;
+}
+
+button{
+    padding: 8px 24px;
+    height: 48px;
+    background-color: #9615FF;
+    color: #fff;
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 100px;
+    margin-top: 32px;
+    line-height: 1;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    transform: translateY(0px);
+    -webkit-transition: transform 0.3s ease-out;
+    -moz-transition: transform 0.3s ease-out;
+     -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+
+}
+
+button:focus {outline:0;}
+
+.secondary{
+    background-color: #fff;
+    color: #7400D3;
+    border: 3px solid #9615FF;
+    margin-top: 8px;
+    margin-bottom: 32px;
+
+}
+
+
+#custom-button{
+    display: none;
+}
+
+
+#custom-button.show{
+    display: block;
+}
+
+.intro-container{
+    width: 60%;
+    text-align: center;
+    margin: auto;
+    align-content: center;
+    padding-top: 140px;
+    padding-bottom: 120px;
+}
+
+
+.logo img{
+    width: 200px;
+    height: auto;
+    padding-bottom: 16px;
+}
+
+
+.intro-description{
+    font-family: sofia-pro, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #858387;
+    line-height: 1.5;
+}
+
+button:hover{
+    box-shadow: 0px 4px 16px 0px rgba(14,0,21,0.1);
+    transform: translateY(-2px);
+    -webkit-transition: transform 0.3s ease-out;
+    -moz-transition: transform 0.3s ease-out;
+     -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+
+}
+
+.track-name{
+    font-family: sofia-pro, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+
+.artist-name{
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
+}
+
+.album-art{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.album-art img{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+}
+
+.container{
+    width: 80%;
+    max-width: 1800px;
+    margin: auto;
+}
+
+.cards-flex{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    /* justify-content: space-around;
+    align-items: flex-start; */
+
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: flex-start; */
+    width: 30%;
+    min-width: 300px;
+    margin-left: 32px;
+}
+
+.album-art{
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.track-description{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(90% - 40px);
+}
+
+.track{
+    padding: 16px 0px;
+    border-bottom: 1px solid #F3F3F3;
+    width: 100%;
+}
+
+
+.card{
+    padding: 32px;;
+    margin-bottom: 56px;
+    width: 80%;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0px 16px 48px 0px rgba(10,10,10,0.05);
+}
+
+.footer{
+    text-align: center;
+    padding-bottom: 80px;
+    padding-top: 48px;
+    color: #575359;
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* ----------------------------------------------------------------------------- */
+
+#snackbar img{
+    height: 24px;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    padding-right: 8px;
+}
+
+#snackbar{
+  margin: auto;
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px;
+  max-width: 320px;
+   /* Set a default minimum width */
+  background-color: #fff; /* Black background color */
+  color: #555; /* White text color */ /* Centered text */
+  border-radius: 48px; /* Rounded borders */
+  border: 2px solid #9615FF;
+  padding: 16px 40px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  bottom: 30px; /* 30px from the bottom */
+  font-family: sofia-pro, sans-serif;
+  font-size: 16px;
+  font-weight: regular;
+  font-weight: 600;
+  line-height: 1.5;
+  box-shadow: 0px 4px 16px 0px rgba(14,0,21,0.1);
+}
+
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+  .empty-state{
+      font-family: sofia-pro, sans-serif;
+      font-size: 18px;
+      text-align: center;
+      margin: auto;
+      padding-top: 32px;
+      width: 80%;
+      line-height: 1.5;
+      color: #ABA9AC;
+      display: block;
+  }
+
+#custom-empty-state{
+    padding-top: 0px;
+}
+
+  #sad-empty-state.hide{
+      display: none;
+  }
+
+  #happy-empty-state.hide{
+    display: none;
+}
+
+#aggressive-empty-state.hide{
+    display: none;
+}
+
+#chill-empty-state.hide{
+    display: none;
+}
+
+#party-empty-state.hide{
+    display: none;
+}
+
+/* //---------------------------------------------------------------- */
+
+.slider-container{
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+
+
+.slider-container img{
+    height: 24px;
+    width: auto;
+    position: relative;
+    top: 8px;
+}
+
+input[type=range] {
+    height: 38px;
+    -webkit-appearance: none;
+    width: calc(100% - 80px);
+    outline: none;
+    background: transparent;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  
+  input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+  
+  input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+  
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+  }
+ /*---------------------------------------*/
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 48px;
+    border: 3px solid #9615FF;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -4px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  }
+  
+  /* All the same stuff for Firefox */
+  input[type=range]::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+    border: 2px solid #9615FF;
+    border-radius: 48px;
+    background: #ffffff;
+    cursor: pointer;
+  }
+  
+  /* All the same stuff for IE */
+  input[type=range]::-ms-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 48px;
+    border: 2px solid #9615FF;
+    background: #ffffff;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 16px;
+  cursor: pointer;
+  background: #9615FF;
+  border-radius: 40px;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+  height: 16px;
+  cursor: pointer;
+  background: #9615FF;
+  border-radius: 40px;
+  }

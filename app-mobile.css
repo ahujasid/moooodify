@@ -1,0 +1,250 @@
+@media only screen and (max-device-width: 830px){
+
+a{
+    color: #575359;
+    text-decoration: underline;
+    font-family: sofia-pro, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+a:hover{
+    color: #7400D3;
+}
+
+
+.container{
+    width: 100%;
+    max-width: 1800px;
+    margin: auto;
+}
+
+
+h1{
+    font-family: sofia-pro, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #7400D3;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E9E9E9;
+    line-height: 1;
+    line-height: 1.2;
+}
+
+
+h2{
+    font-family: sofia-pro, sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: #7400D3;
+    padding-bottom: 8px;
+    line-height: 1.2;
+}
+
+h1 img{
+    width: 24px;
+    height: auto;
+    position: relative;
+    top: 4px;
+}
+
+body{
+    background-color: #FAF3FF;
+}
+
+button{
+    padding: 8px 24px;
+    height: 48px;
+    background-color: #9615FF;
+    color: #fff;
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 100px;
+    margin-top: 32px;
+    line-height: 1;
+    width: 100%;
+    cursor: pointer;
+    transform: translateY(0px);
+    -webkit-transition: transform 0.3s ease-out;
+    -moz-transition: transform 0.3s ease-out;
+     -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+
+}
+
+.intro-container{
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    align-content: center;
+    padding-top: 140px;
+    padding-bottom: 120px;
+}
+
+
+.logo img{
+    width: 200px;
+    height: auto;
+    padding-bottom: 16px;
+}
+
+
+.intro-description{
+    font-family: sofia-pro, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #858387;
+    line-height: 1.5;
+}
+
+button:hover{
+    box-shadow: 0px 4px 16px 0px rgba(14,0,21,0.1);
+    transform: translateY(-2px);
+    -webkit-transition: transform 0.3s ease-out;
+    -moz-transition: transform 0.3s ease-out;
+     -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+
+}
+
+.track-name{
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+
+.artist-name{
+    font-family: sofia-pro, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+}
+
+.album-art{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+}
+
+.album-art img{
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+}
+
+
+
+.flex-col{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    min-width: 300px;
+    margin: auto;
+}
+
+.album-art{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.track-description{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(90% - 28px);
+}
+
+.track{
+    padding: 16px 0px;
+    border-bottom: 1px solid #F3F3F3;
+    width: 100%;
+}
+
+.card{
+    padding: 24px;;
+    margin-bottom: 40px;
+    width: 80%;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0px 16px 48px 0px rgba(10,10,10,0.05);
+}
+
+.footer{
+    text-align: center;
+    padding-bottom: 80px;
+    padding-top: 48px;
+    width: 80%;
+}
+
+
+#snackbar img{
+    height: 24px;
+    width: auto;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    padding-right: 8px;
+}
+
+#snackbar{
+    margin-left: 5%;
+    visibility: hidden; /* Hidden by default. Visible on click */
+    /* min-width: 250px; */
+    max-width: 320px;
+    width: 90%; /* Set a default minimum width */
+    background-color: #fff; /* Black background color */
+    color: #555; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 48px; /* Rounded borders */
+    border: 2px solid #9615FF;
+    padding: 16px 40px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    bottom: 30px; /* 30px from the bottom */
+    font-family: sofia-pro, sans-serif;
+    font-size: 16px;
+    font-weight: regular;
+    font-weight: 600;
+    line-height: 1.5;
+    box-shadow: 0px 4px 16px 0px rgba(14,0,21,0.1);
+}
+
+#snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    -moz-animation: transform 0.3s ease-out;
+     -o-animation: transform 0.3s ease-out;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+}
