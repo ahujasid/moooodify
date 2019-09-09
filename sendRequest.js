@@ -59,7 +59,10 @@ var sadJsonData = {
 
 $(document).ready(function() { 
 
-    access_token = localStorage.getItem('access_token');;
+    access_token = localStorage.getItem('access_token');
+    if(localStorage===null){
+      access_token = sessionStorage.getItem('access_token');
+    }
     console.log(access_token);
     $.ajax({
         url: 'https://api.spotify.com/v1/me/top/tracks?limit=50',
@@ -132,8 +135,8 @@ function requestTrackInfo(trackIDs){
             success: function(response) {
                 console.log(response);
                 index = this.ajaxI;
-                // console.log("tracks se response aaya");
-                // console.log(index);
+                console.log("tracks se response aaya");
+                console.log(index);
                 setTrackInfo(response, index);
 
             },
@@ -166,7 +169,7 @@ function calculateCategory(){
 
  
         if(trackMood[i] < 0.3 && trackEnergy[i]<0.6) { console.log("adding to sad"); addToSad(i); saduri += String(trackURIs[i]); saduri += "," }
-        if(trackMood[i] > 0.65) { console.log("adding to happy"); addToHappy(i);  happyuri += String(trackURIs[i]);  happyuri += "," }
+        if(trackMood[i] > 0.6 && trackEnergy[i] > 0.3) { console.log("adding to happy"); addToHappy(i);  happyuri += String(trackURIs[i]);  happyuri += "," }
         if(trackEnergy[i] > 0.8) {  console.log("adding to aggr"); addToAggressive(i);  aggressiveuri += String(trackURIs[i]);  aggressiveuri += "," }
         if(trackMood[i] > 0.3 && trackDance[i]>0.75) {  console.log("adding to party"); addToParty(i); partyuri += String(trackURIs[i]);  partyuri += "," }
         if(trackEnergy[i] < 0.4 && trackMood[i] > 0.3) {  console.log("adding to chill"); addToChill(i); chilluri += String(trackURIs[i]);  chilluri += "," }
@@ -194,11 +197,14 @@ function getCustomTracks(){
     
     if((trackMood[i] <= moodVal + 0.25) && (trackMood[i] >= moodVal - 0.25) && (trackDance[i] <= danceVal + 0.25) && (trackDance[i] >= danceVal -0.25) && (trackEnergy[i] <= energyVal + 0.25) && (trackMood[i] >= energyVal - 0.25) ){
       
-      customuri += String(trackURIs[i]); customuri += ",";  addToCustom(i); customCount++;
-
+      customuri += String(trackURIs[i]); customuri += ",";  addToCustom(i); customCount++; 
     }
-  }
 
+    if(i==length-1 && customCount ==0){
+      showEmptyMessage();
+    }
+
+  }
 
 }
 
@@ -207,6 +213,17 @@ function emptyCustomList(){
   while (myNode.firstChild) {
     myNode.removeChild(myNode.firstChild);
 }
+}
+
+
+function showEmptyMessage(){
+  var referenceNode = document.querySelector('#track-list-custom');
+  var newNode = document.createElement('div');
+  newNode.className = "empty-state";
+
+  newNode.innerHTML = "No songs found for this mood. Try another."
+
+  referenceNode.appendChild(newNode);
 }
 
 function addToCustom(i){
@@ -695,7 +712,8 @@ function createPlaylistParty(user){
 
 //-----------------------------------------------------------------------
 
-function addCustomTracks(playlist){
+
+function addSadTracks(playlist){
   $.ajax({
       type: 'POST',
       url: 'https://api.spotify.com/v1/playlists/' + encodeURIComponent(playlist.id) + '/tracks?uris=' + saduri,
@@ -716,23 +734,25 @@ function addCustomTracks(playlist){
 
 
 
-function addSadTracks(playlist){
-    $.ajax({
-        type: 'POST',
-        url: 'https://api.spotify.com/v1/playlists/' + encodeURIComponent(playlist.id) + '/tracks?uris=' + saduri,
-        headers: {
-          'Authorization': 'Bearer ' + access_token,
-          'Content-Type': 'application/json'
-        },
-        success: function(result) {
-          console.log('Woo! :)');
-          showSnackbar();
-        },
-        error: function() {
-          console.log('Error! :(');
-        }
-      })
+function addCustomTracks(playlist){
+  $.ajax({
+      type: 'POST',
+      url: 'https://api.spotify.com/v1/playlists/' + encodeURIComponent(playlist.id) + '/tracks?uris=' + customuri,
+      headers: {
+        'Authorization': 'Bearer ' + access_token,
+        'Content-Type': 'application/json'
+      },
+      success: function(result) {
+        console.log('Woo! :)');
+        showSnackbar();
+      },
+      error: function() {
+        console.log('Error! :(');
+      }
+    })
 }
+
+
 
 function addHappyTracks(playlist){
     $.ajax({
@@ -827,6 +847,7 @@ function showCustomButton(){
   var x = document.getElementById("custom-button");
   x.className = "show";
 }
+
 
 function hideCustomButton(){
   $("#custom-button").removeClass("intro");

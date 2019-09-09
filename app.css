@@ -137,6 +137,7 @@ button:hover{
     font-size: 16px;
     font-weight: 400;
     color: #555;
+    line-height: 1.2;
 }
 
 .album-art{
