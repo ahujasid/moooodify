@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>mooodify - Music for any feel</title>
+    <title>mooodify - music for any feel</title>
     <link rel="stylesheet" href="https://use.typekit.net/ydp3etu.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="sendRequest.js"></script>
@@ -27,6 +27,8 @@
 
         gtag('config', 'UA-81723672-4');
         </script>
+
+        <meta name="description" content="Sort your Spotify music by any mood you like, and save them as playlists." /> 
 
         <meta property="og:title" content="moooodify">
         <meta property="og:description" content="Sort your Spotify music by any mood">
@@ -57,8 +59,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class = "intro-container">
 
                 <div class = "logo"><img src = "assets/moodify-logo-min.png"></div>
-                 <div class = "intro-description">Save your favourite music over the past 6 months by mood. The music is classified using Spotify's <a href = "https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/" target = "_blank">audio features</a>.</div>
+                 <div class = "intro-description">Save your favourite music by mood.<br /> The music is classified using Spotify's <a href = "https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/" target = "_blank">audio features</a>.</div>
         
+        </div>
+
+        <div id ="your-favourite-tracks"><h1>your favourite tracks</h1></div>
+        
+        <div class = "tabs">
+                <button class = "tab" id = "one-month-tab" onclick="oneMonthRequest();">last 1 month</button>
+                <button class = "tab" id = "six-months-tab" onclick="sixMonthsRequest();">last 6 months</button>
+                <button class = "tab" id = "all-time-tab" onclick="allTimeRequest();">all time</button>
         </div>
        
         
@@ -69,7 +79,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             
             <div class = "card" id= "happy">
-                    <h1>uplifting <img src = "assets/happy-emoji-min.png"></h1>
+                    <h1>upbeat <img src = "assets/happy-emoji-min.png"></h1>
                     <div class = "track-list" id = "track-list-happy">
                             <div id = "happy-empty-state" class = "empty-state">Nothing to show here</div>
                     </div>
@@ -78,7 +88,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             
 
             <div class = "card" id= "party">
-                <h1>partayyy <img src = "assets/dance-emoji-min.png"></h1>
+                <h1>partayyy <img src = "assets/dance-guy-emoji-min.png"></h1>
                     <div class = "track-list" id = "track-list-party">
                             <div id = "party-empty-state" class = "empty-state">Nothing to show here</div>
                     </div>
@@ -131,7 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        
 
             <div class = "card" id= "sad">
-                    <h1>downers <img src = "assets/sad-emoji-min.png"></h1>
+                    <h1>mellow <img src = "assets/mellow-emoji-min.png"></h1>
     
                     <div class = "track-list" id = "track-list-sad">
                         <div id = "sad-empty-state" class = "empty-state">Nothing to show here</div>

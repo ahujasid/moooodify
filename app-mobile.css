@@ -73,6 +73,24 @@ button{
 
 }
 
+.tabs{
+    flex-direction: column;
+    width: 90%;
+    padding-bottom: 64px;
+}
+
+.tab{
+    font-size: 16px;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.tab.active{
+    font-size: 16px;
+    width: 100%;
+}
+
+
 .intro-container{
     width: 90%;
     text-align: center;
@@ -101,7 +119,7 @@ button{
 .intro-description a{
     font-size: 18px;
     color: #858387;
-    line-height: 1.5;
+    line-height: 1.7;
 }
 
 button:hover{
@@ -188,6 +206,7 @@ button:hover{
     padding-top: 48px;
     width: 80%;
     line-height: 1.5;
+    margin: 0 auto;
 }
 
 .footer a{

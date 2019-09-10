@@ -29,6 +29,8 @@ var access_token;
 
 var deferredArr=[];
 
+var alltracks;
+
 var customCount = 0;
 
 //-------------------------------------------------------------------------------
@@ -58,157 +60,28 @@ var sadJsonData = {
 $(document).ready(function() { 
 
     access_token = localStorage.getItem('access_token');
+    if(localStorage===null){
+      access_token = sessionStorage.getItem('access_token');
+    }
     console.log(access_token);
-    oneMonthRequest();
+    $.ajax({
+        url: 'https://api.spotify.com/v1/me/top/tracks?limit=50',
+        headers: {
+            'Authorization': 'Bearer ' + access_token
+        },
+        success: function(response) {
+            console.log(response);
+            console.log("response aaya");
+            console.log("bheja");
+            length = response.total;
+            counter = response.total;
+            getTrackIDs(response);
+            getAlbumArt();
+
+        }
+    })
 
 });
-
-function sixMonthsRequest(){
-  
-  setSixMonthsActive();
-  resetEverything();
-
-  $.ajax({
-    url: 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term',
-    headers: {
-        'Authorization': 'Bearer ' + access_token
-    },
-    success: function(response) {
-        // console.log(response);
-        // console.log("response aaya");
-        // console.log("bheja");
-        length = response.total;
-        counter = response.total;
-        getTrackIDs(response);
-        getAlbumArt();
-
-    }
-})
-}
-
-function allTimeRequest(){
-  
-  setAllTimeActive();
-  resetEverything();
-
-  $.ajax({
-    url: 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term',
-    headers: {
-        'Authorization': 'Bearer ' + access_token
-    },
-    success: function(response) {
-        // console.log(response);
-        // console.log("response aaya");
-        // console.log("bheja");
-        length = response.total;
-        counter = response.total;
-        getTrackIDs(response);
-        getAlbumArt();
-
-    }
-})
-}
-
-function oneMonthRequest(){
-  
-  resetEverything();
-  setOneMonthActive();
-
-  $.ajax({
-    url: 'https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term',
-    headers: {
-        'Authorization': 'Bearer ' + access_token
-    },
-    success: function(response) {
-        // console.log(response);
-        // console.log("response aaya");
-        // console.log("bheja");
-        length = response.total;
-        counter = response.total;
-        getTrackIDs(response);
-        getAlbumArt();
-
-    }
-})
-}
-
-function resetEverything(){
-  saduri = "";
-  happyuri = "";
-  aggressiveuri = "";
-  chilluri = "";
-  partyuri = "";
-  
-  
-  sadcounter = 0;
-  happycounter = 0;
-  aggressivecounter = 0;
-  chillcounter = 0;
-  partycounter = 0;
-  
-  trackIDs = [];
-  trackNames = [];
-  artistNames = [];
-  trackURIs = [];
-  albumObjs = [];
-  albumArts = [];
-
-  trackDance = [];
-  trackEnergy = [];
-  trackMood = [];
-  trackTempo = [];
-
-
-  artistImg = [];
-
-  counter = 0;
-
-  chill=[];
-  party=[];
-  happy=[];
-  sad=[];
-  angry=[];
-
-  length=0
-
-  deferredArr=[];
-
-  customCount = 0;
-
-  resetDOMs();
-  
-}
-
-
-function resetDOMs(){
-  $("#sad-empty-state").removeClass("hide");
-  $("#happy-empty-state").removeClass("hide");
-  $("#aggressive-empty-state").removeClass("hide");
-  $("#chill-empty-state").removeClass("hide");
-  $("#party-empty-state").removeClass("hide");
-  $("#custom-button").removeClass("show");
-
-//   const myNode = document.getElementById("track-list-custom");
-  
-//   while (myNode.lastChild.id !== 'custom-empty-state') {
-//     myNode.removeChild(cntnt.lastChild);
-// }
-
-  $("#track-list-custom").children(":not(#custom-empty-state)").remove();
-  $('#custom-empty-state').addClass('empty-state');
-  $("#track-list-sad").children(":not(#sad-empty-state)").remove();
-  $('#sad-empty-state').addClass('empty-state');
-  $("#track-list-happy").children(":not(#happy-empty-state)").remove();
-  $('#happy-empty-state').addClass('empty-state');
-  $("#track-list-aggressive").children(":not(#aggressive-empty-state)").remove();
-  $('#aggressive-empty-state').addClass('empty-state');
-  $("#track-list-chill").children(":not(#chill-empty-state)").remove();
-  $('#chill-empty-state').addClass('empty-state');
-  $("#track-list-party").children(":not(#party-empty-state)").remove();
-  $('#party-empty-state').addClass('empty-state');
-
-}
-
 
 function getTrackIDs(musicList){
 
@@ -227,7 +100,7 @@ function getTrackIDs(musicList){
 function getAlbumArt(){
 
     for(i=0;i<length;i++){
-      //  console.log("album obj: " + albumObjs[i]);
+       console.log("album obj: " + albumObjs[i]);
         $.ajax({
             url: 'https://api.spotify.com/v1/albums/' + encodeURIComponent(albumObjs[i]),
             headers: {
@@ -235,7 +108,7 @@ function getAlbumArt(){
             },
             ajaxI: i,
             success: function(response) {
-                // console.log(response);
+                console.log(response);
                 i = this.ajaxI;
                 storeImages(response, i);
             }
@@ -260,10 +133,10 @@ function requestTrackInfo(trackIDs){
             },
             ajaxI: index,
             success: function(response) {
-                // console.log(response);
+                console.log(response);
                 index = this.ajaxI;
-                // console.log("tracks se response aaya");
-                // console.log(index);
+                console.log("tracks se response aaya");
+                console.log(index);
                 setTrackInfo(response, index);
 
             },
@@ -283,8 +156,8 @@ function setTrackInfo(track, x){
         trackEnergy[x] = track.energy;
         trackMood[x] = track.valence;
         trackTempo[x] = track.tempo;
-        // console.log(x);
-        // console.log(trackMood[x]);
+        console.log(x);
+        console.log(trackMood[x]);
 }
 
 
@@ -295,17 +168,17 @@ function calculateCategory(){
     for(i=0;i<length;i++){  
 
  
-        if(trackMood[i] < 0.3 && trackEnergy[i]<0.6) { addToSad(i); saduri += String(trackURIs[i]); saduri += "," }
-        if(trackMood[i] > 0.6 && trackEnergy[i] > 0.3) {  addToHappy(i);  happyuri += String(trackURIs[i]);  happyuri += "," }
-        if(trackEnergy[i] > 0.8) {   addToAggressive(i);  aggressiveuri += String(trackURIs[i]);  aggressiveuri += "," }
-        if(trackMood[i] > 0.3 && trackDance[i]>0.75) {   addToParty(i); partyuri += String(trackURIs[i]);  partyuri += "," }
-        if(trackEnergy[i] < 0.4 && trackMood[i] > 0.3) {   addToChill(i); chilluri += String(trackURIs[i]);  chilluri += "," }
+        if(trackMood[i] < 0.3 && trackEnergy[i]<0.6) { console.log("adding to sad"); addToSad(i); saduri += String(trackURIs[i]); saduri += "," }
+        if(trackMood[i] > 0.6 && trackEnergy[i] > 0.3) { console.log("adding to happy"); addToHappy(i);  happyuri += String(trackURIs[i]);  happyuri += "," }
+        if(trackEnergy[i] > 0.8) {  console.log("adding to aggr"); addToAggressive(i);  aggressiveuri += String(trackURIs[i]);  aggressiveuri += "," }
+        if(trackMood[i] > 0.3 && trackDance[i]>0.75) {  console.log("adding to party"); addToParty(i); partyuri += String(trackURIs[i]);  partyuri += "," }
+        if(trackEnergy[i] < 0.4 && trackMood[i] > 0.3) {  console.log("adding to chill"); addToChill(i); chilluri += String(trackURIs[i]);  chilluri += "," }
 
     }
 }
 
 function getCustomTracks(){
-  // console.log("fetching custom tracks");
+  console.log("fetching custom tracks");
   hideCustomButton();
   var moodVal = document.getElementById("mood-slider").value; 
   moodVal = moodVal/100;
@@ -313,7 +186,7 @@ function getCustomTracks(){
   danceVal = danceVal/100;
   var energyVal = document.getElementById("energy-slider").value;
   energyVal = energyVal/100;
-  // console.log(moodVal, danceVal, energyVal);
+  console.log(moodVal, danceVal, energyVal);
   
   customCount = 0;
   var customTracks = [];
@@ -720,8 +593,8 @@ function createPlaylistSad(user){
         type: 'POST',
         url: 'https://api.spotify.com/v1/users/' + encodeURIComponent(user.id) + '/playlists',
         data: JSON.stringify({
-             "name": "mellow - moooodify",
-            "description": "Your favourite mellow tracks generated on moooodify.com"
+             "name": "downers - moooodify",
+            "description": "Your favourite melancholy tracks generated on moooodify.com"
 
          }),
         headers: {
@@ -745,8 +618,8 @@ function createPlaylistHappy(user){
         type: 'POST',
         url: 'https://api.spotify.com/v1/users/' + encodeURIComponent(user.id) + '/playlists',
         data: JSON.stringify({
-             "name": "upbeat - moooodify",
-            "description": "Your favourite upbeat tracks generated on moooodify.com"
+             "name": "uplifting - moooodify",
+            "description": "Your favourite uplifting tracks generated on moooodify.com"
 
          }),
         headers: {
@@ -965,10 +838,10 @@ function showSnackbar(){
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
-function showCustomEmptyState(){
-  var x = document.getElementById("custom-empty-state");
-  x.className = "show";
-}
+// function hideCustomEmptyState(){
+//   var x = document.getElementById("custom-empty-state");
+//   x.className = "hide";
+// }
 
 function showCustomButton(){
   var x = document.getElementById("custom-button");
@@ -977,7 +850,7 @@ function showCustomButton(){
 
 
 function hideCustomButton(){
-  $("#custom-button").removeClass("show");
+  $("#custom-button").removeClass("intro");
 }
 
 function hideSadEmptyState(){
@@ -1004,26 +877,6 @@ function hidePartyEmptyStates(){
   var x = document.getElementById("party-empty-state");
   x.className = "hide";
 }
-
-function setOneMonthActive(){
-  $('#one-month-tab').addClass('active');
-  $('#six-months-tab').removeClass('active');
-  $('#all-time-tab').removeClass('active');
-}
-
-function setSixMonthsActive(){
-  $('#one-month-tab').removeClass('active');
-  $('#six-months-tab').addClass('active');
-  $('#all-time-tab').removeClass('active');
-}
-
-function setAllTimeActive(){
-  $('#one-month-tab').removeClass('active');
-  $('#six-months-tab').removeClass('active');
-  $('#all-time-tab').addClass('active');
-}
-
-
 
 
 //------------------------------------------------------------------------------------
