@@ -113,6 +113,16 @@ button:focus {outline:0;}
     line-height: 1.5;
 }
 
+.intro-description a{
+    font-size: 18px;
+    color: #858387;
+    line-height: 1.5;
+}
+
+.intro-description a:hover{
+    color: #7400D3;
+}
+
 button:hover{
     box-shadow: 0px 4px 16px 0px rgba(14,0,21,0.1);
     transform: translateY(-2px);
