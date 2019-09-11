@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     // const urlParams = new URLSearchParams(window.location.search);
     const access_hash = window.location.hash.substr(1).split('&');
-    console.log(access_hash);
+    // console.log(access_hash);
     var key = {};
     // access_token = access_hash.substr(access_hash.search(/(?<=^|&)access_token=/))
     //               .split('&')[0]
@@ -18,8 +18,8 @@ $(document).ready(function() {
         key[tmp[0]] = tmp[1];
       }
        
-    console.log(key['access_token']);
-    console.log("hello");
+    // console.log(key['access_token']);
+    // console.log("hello");
     access_token = key['access_token'];
     localStorage.setItem('access_token', access_token);
     sessionStorage.setItem('access_token', access_token);

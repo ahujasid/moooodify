@@ -7,9 +7,6 @@ var trackURIs = [];
 var albumObjs = [];
 var albumArts = [];
 
-var albumObjString = "";
-var trackIDString = "";
-
 var trackDance = [];
 var trackEnergy = [];
 var trackMood = [];
@@ -164,11 +161,9 @@ function resetEverything(){
   chilluri = "";
   partyuri = "";
 
-  playlistName = "";
+  playlistName = ""
   
-  albumObjString = "";
-  trackIDString = "";
-
+  
   sadcounter = 0;
   happycounter = 0;
   aggressivecounter = 0;
@@ -247,132 +242,75 @@ function getTrackIDs(musicList){
 
     for(i=0;i<length;i++){
         trackIDs[i] = musicList.items[i].id;
-        trackIDString += String(musicList.items[i].id); trackIDString += ",";
         trackNames[i] = musicList.items[i].name;
         artistNames[i] = musicList.items[i].artists[0].name;
         trackURIs[i] = musicList.items[i].uri;
         albumObjs[i] = musicList.items[i].album.id;
-        albumObjString += String(musicList.items[i].album.id); albumObjString += ",";
     }
-    // getAlbumArt(i);
-    requestTrackInfo();
+    getAlbumArt(i);
+    requestTrackInfo(trackIDs);
 
 }
 
 function getAlbumArt(){
 
-      var str1 = albumObjString.split(',');
-      var str2 = ""; var str3 = ""; var str4 = ""; var albumCounter = 0;
-      for(i=0;i<length;i++){
-        if(i<20){ str2 += str1[i]; str2 += ",";  }
-        if( i >= 20 && i < 40) { str3 += str1[i]; str3 += ","; }
-        if( i >= 40 && i < length) { str4 += str1[i]; str4 += ","; }
-      }
-      str2 = str2.replace(/,\s*$/, "");
-      str3 = str3.replace(/,\s*$/, "");
-      str4 = str4.replace(/,\s*$/, "");
-
-      $.when(getAlbumArt1(str2), getAlbumArt2(str3), getAlbumArt3(str4)).done(function(a1, a2, a3){
-        // console.log(a1); console.log(a2); console.log(a3);
-        storeImages(a1,a2,a3);
-       
-      })
-}
-
-function getAlbumArt1(str){
-  return $.ajax({
-    url: 'https://api.spotify.com/v1/albums?ids=' + encodeURIComponent(str),
-    headers: {
-        'Authorization': 'Bearer ' + access_token
-    },
-    // ajaxI: i,
-    // success: function(response) {
-    //     // console.log(response);
-    //     // i = this.ajaxI;
-       
-    // }
-})
-}
-
-function getAlbumArt2(str){
-  return $.ajax({
-    url: 'https://api.spotify.com/v1/albums?ids=' + encodeURIComponent(str),
-    headers: {
-        'Authorization': 'Bearer ' + access_token
-    },
-    // ajaxI: i,
-    // success: function(response) {
-    //     // console.log(response);
-    //     // i = this.ajaxI;
-       
-    // }
-})
-}
-
-function getAlbumArt3(str){
-  return $.ajax({
-    url: 'https://api.spotify.com/v1/albums?ids=' + encodeURIComponent(str),
-    headers: {
-        'Authorization': 'Bearer ' + access_token
-    },
-    // ajaxI: i,
-    // success: function(response) {
-    //     // console.log(response);
-    //     // i = this.ajaxI;
-       
-    // }
-})
-}
-
-function storeImages(response1, response2, response3){
-
-  for(index=0;index<length;index++){   
-        if(index<20) { 
-          albumArts[index] = response1[0].albums[index].images[0].url;  
-        }
-        if( index >= 20 && index < 40) { 
-          albumArts[index] = response2[0].albums[index-20].images[0].url; 
-        }
-        if( index >= 40 && index < length) { 
-          albumArts[index] = response3[0].albums[index-40].images[0].url; 
-        } 
-  }
-  calculateCategory(); 
-}
-
-function requestTrackInfo(){
-   
-    // for(index=0;index<length;index++){
-        
-        // var uri = trackIDs[index];
-        // deferredArr.push(
+    for(i=0;i<length;i++){
+      //  console.log("album obj: " + albumObjs[i]);
         $.ajax({
-            url: 'https://api.spotify.com/v1/audio-features?ids='+encodeURIComponent(trackIDString),
+            url: 'https://api.spotify.com/v1/albums/' + encodeURIComponent(albumObjs[i]),
             headers: {
                 'Authorization': 'Bearer ' + access_token
             },
-            // ajaxI: index,
+            ajaxI: i,
             success: function(response) {
-                setTrackInfo(response);
+                // console.log(response);
+                i = this.ajaxI;
+                storeImages(response, i);
+            }
+        })
+    }
+}
+
+function storeImages(response, i){
+        albumArts[i] = response.images[0].url;
+}
+
+function requestTrackInfo(trackIDs){
+   
+    for(index=0;index<length;index++){
+        
+        var uri = trackIDs[index];
+        deferredArr.push(
+        $.ajax({
+            url: 'https://api.spotify.com/v1/audio-features/'+encodeURIComponent(uri),
+            headers: {
+                'Authorization': 'Bearer ' + access_token
+            },
+            ajaxI: index,
+            success: function(response) {
+                // console.log(response);
+                index = this.ajaxI;
+                // console.log("tracks se response aaya");
+                // console.log(index);
+                setTrackInfo(response, index);
+
             },
             })
-        // )
-    // }
+        )
+    }
 
-    // $.when.apply($,deferredArr).done(function() {
-
-    // });
+    $.when.apply($,deferredArr).done(function() {
+        calculateCategory();
+    });
     
 }
 
-function setTrackInfo(track){
+function setTrackInfo(track, x){
 
-    for(i=0;i<length;i++){
-        trackDance[i] = track.audio_features[i].danceability;
-        trackEnergy[i] = track.audio_features[i].energy;
-        trackMood[i] = track.audio_features[i].valence;
-        trackTempo[i] = track.audio_features[i].tempo;
-    }
+        trackDance[x] = track.danceability;
+        trackEnergy[x] = track.energy;
+        trackMood[x] = track.valence;
+        trackTempo[x] = track.tempo;
         // console.log(x);
         // console.log(trackMood[x]);
 }
@@ -380,7 +318,7 @@ function setTrackInfo(track){
 
 function calculateCategory(){
   
-        //  console.log("entered calculation");
+         console.log("entered calculation");
 
     for(i=0;i<length;i++){  
 
