@@ -47,6 +47,7 @@ var happyuri = "";
 var aggressiveuri = "";
 var chilluri = "";
 var partyuri = "";
+var customuri = "";
 
 
 var sadcounter = 0;
@@ -163,6 +164,7 @@ function resetEverything(){
   aggressiveuri = "";
   chilluri = "";
   partyuri = "";
+  customuri = "";
 
   playlistName = "";
   
@@ -406,8 +408,6 @@ function getCustomTracks(){
   // console.log(moodVal, danceVal, energyVal);
   
   customCount = 0;
-  var customTracks = [];
-  var customuri = "";
   emptyCustomList();
 
   for(i=0;i<length;i++){  

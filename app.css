@@ -264,6 +264,16 @@ button:focus {outline:0;}
     padding: 16px 0px;
     border-bottom: 1px solid #F3F3F3;
     width: 100%;
+
+    transform: translate3d(0, -4px, 0);
+    -webkit-animation-name: fade-in;
+    animation-name: fade-in;
+    -webkit-animation-timing-function: ease;
+    animation-timing-function: ease;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
 }
 
 
@@ -476,3 +486,28 @@ input[type=range]::-moz-range-track {
   background: #9615FF;
   border-radius: 40px;
   }
+
+
+  /*=============================================================== Animating cells ===========================================================*/
+
+  
+  
+@-webkit-keyframes fade-in {
+    0% {
+        -webkit-transform: translate3d(0, -4px, 0);
+                transform: translate3d(0, -4px, 0);
+        opacity: 0; }
+    100% {
+        -webkit-transform: translate3d(0, 0px, 0);
+                transform: translate3d(0, 0px, 0);
+        opacity: 1; } }
+    
+@keyframes fade-in {
+0% {
+    -webkit-transform: translate3d(0, -4px, 0);
+            transform: translate3d(0, -4px, 0);
+    opacity: 0; }
+100% {
+    -webkit-transform: translate3d(0, 0px, 0);
+            transform: translate3d(0, 0px, 0);
+    opacity: 1; } }
