@@ -79,6 +79,9 @@ $(document).ready(function() {
 
     access_token = localStorage.getItem('access_token');
     // console.log(access_token);
+
+    // $.ajaxSetup({ cache: false });
+
     today = new Date();
     getTodayDate();
     oneMonthRequest();
@@ -103,9 +106,8 @@ function sixMonthsRequest(){
         length = response.total;
         counter = response.total;
         getTrackIDs(response);
-        getAlbumArt();
 
-    }
+    },
 })
 }
 
@@ -127,9 +129,8 @@ function allTimeRequest(){
         length = response.total;
         counter = response.total;
         getTrackIDs(response);
-        getAlbumArt();
 
-    }
+    },
 })
 }
 
@@ -151,9 +152,7 @@ function oneMonthRequest(){
         length = response.total;
         counter = response.total;
         getTrackIDs(response);
-        getAlbumArt();
-
-    }
+    },
 })
 }
 
@@ -273,11 +272,11 @@ function getAlbumArt(){
       str2 = str2.replace(/,\s*$/, "");
       str3 = str3.replace(/,\s*$/, "");
       str4 = str4.replace(/,\s*$/, "");
+      
+
 
       $.when(getAlbumArt1(str2), getAlbumArt2(str3), getAlbumArt3(str4)).done(function(a1, a2, a3){
-        // console.log(a1); console.log(a2); console.log(a3);
-        storeImages(a1,a2,a3);
-       
+        storeImages(a1,a2,a3); 
       })
 }
 
@@ -331,14 +330,16 @@ function storeImages(response1, response2, response3){
   for(index=0;index<length;index++){   
         if(index<20) { 
           albumArts[index] = response1[0].albums[index].images[0].url;  
-        }
+        } 
         if( index >= 20 && index < 40) { 
           albumArts[index] = response2[0].albums[index-20].images[0].url; 
         }
         if( index >= 40 && index < length) { 
           albumArts[index] = response3[0].albums[index-40].images[0].url; 
         } 
+        console.log(albumArts[index]);
   }
+
   calculateCategory(); 
 }
 
@@ -375,6 +376,7 @@ function setTrackInfo(track){
         trackMood[i] = track.audio_features[i].valence;
         trackTempo[i] = track.audio_features[i].tempo;
     }
+    getAlbumArt();
         // console.log(x);
         // console.log(trackMood[x]);
 }
@@ -382,16 +384,16 @@ function setTrackInfo(track){
 
 function calculateCategory(){
   
-        //  console.log("entered calculation");
+    var c;
 
-    for(i=0;i<length;i++){  
-
+    for(c=0;c<length;c++){  
+      // console.log("entered loop");
  
-        if(trackMood[i] < 0.3 && trackEnergy[i]<0.6) { addToSad(i); saduri += String(trackURIs[i]); saduri += "," }
-        if(trackMood[i] > 0.6 && trackEnergy[i] > 0.3) {  addToHappy(i);  happyuri += String(trackURIs[i]);  happyuri += "," }
-        if(trackEnergy[i] > 0.8) {   addToAggressive(i);  aggressiveuri += String(trackURIs[i]);  aggressiveuri += "," }
-        if(trackMood[i] > 0.3 && trackDance[i]>0.75) {   addToParty(i); partyuri += String(trackURIs[i]);  partyuri += "," }
-        if(trackEnergy[i] < 0.4 && trackMood[i] > 0.3) {   addToChill(i); chilluri += String(trackURIs[i]);  chilluri += "," }
+        if(trackMood[c] < 0.3 && trackEnergy[c]<0.6) { addToSad(c); saduri += String(trackURIs[c]); saduri += "," }
+        if(trackMood[c] > 0.6 && trackEnergy[c] > 0.3) {  addToHappy(c);  happyuri += String(trackURIs[c]);  happyuri += "," }
+        if(trackEnergy[c] > 0.8) {   addToAggressive(c);  aggressiveuri += String(trackURIs[c]);  aggressiveuri += "," }
+        if(trackMood[c] > 0.3 && trackDance[c]>0.75) {   addToParty(c); partyuri += String(trackURIs[c]);  partyuri += "," }
+        if(trackEnergy[c] < 0.4 && trackMood[c] > 0.3) {   addToChill(c); chilluri += String(trackURIs[c]);  chilluri += "," }
 
     }
 }
@@ -457,7 +459,6 @@ function addToCustom(i){
   var trackNode = document.createElement('div');
   trackNode.className = "track";
 
-
   var newNode = document.createElement('div');
   newNode.className = "track-description";
   
@@ -476,21 +477,23 @@ function addToCustom(i){
   trackNode.appendChild(newNode);
 
   referenceNode.appendChild(trackNode);
+  
 
   // hideCustomEmptyState();
   showCustomButton();
 }
 
 
-function addToSad(i){
+function addToSad(c){
     
+  console.log("adding to sad");
     var referenceNode = document.querySelector('#track-list-sad');
 
     var imgNode = document.createElement('div');
     imgNode.className = "album-art";
 
     var album_img = document.createElement('img');
-    album_img.src = albumArts[i];
+    album_img.src = albumArts[c];
 
     imgNode.appendChild(album_img);
 
@@ -502,11 +505,11 @@ function addToSad(i){
     newNode.className = "track-description";
     
     var trackname = document.createElement('div');
-    trackname.innerHTML = trackNames[i];
+    trackname.innerHTML = trackNames[c];
     trackname.className = "track-name";
 
     var artistname = document.createElement('div');
-    artistname.innerHTML = artistNames[i];
+    artistname.innerHTML = artistNames[c];
     artistname.className = "artist-name";
 
     newNode.appendChild(trackname);
@@ -516,6 +519,7 @@ function addToSad(i){
     trackNode.appendChild(newNode);
 
     referenceNode.appendChild(trackNode);
+    console.log("added to sad");
 
     hideSadEmptyState();
 }
