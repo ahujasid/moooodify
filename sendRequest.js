@@ -486,7 +486,6 @@ function addToCustom(i){
 
 function addToSad(c){
     
-  console.log("adding to sad");
     var referenceNode = document.querySelector('#track-list-sad');
 
     var imgNode = document.createElement('div');
@@ -519,7 +518,6 @@ function addToSad(c){
     trackNode.appendChild(newNode);
 
     referenceNode.appendChild(trackNode);
-    console.log("added to sad");
 
     hideSadEmptyState();
 }
