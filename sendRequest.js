@@ -246,8 +246,9 @@ function resetDOMs(){
 
 function getTrackIDs(musicList){
 
+  console.log(musicList);
+  console.log(length);
     for(i=0;i<length;i++){
-        console.log(musicList);
         trackIDs[i] = musicList.items[i].id;
         trackIDString += String(musicList.items[i].id); trackIDString += ",";
         trackNames[i] = musicList.items[i].name;
