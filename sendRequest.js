@@ -27,7 +27,7 @@ var sad=[];
 var angry=[];
 
 
-var length;
+var length = 50;
 
 var oneMonthFlag = 0;
 var sixMonthFlag = 0;
@@ -103,7 +103,7 @@ function sixMonthsRequest(){
         // console.log(response);
         // console.log("response aaya");
         // console.log("bheja");
-        length = response.total;
+        // length = response.total;
         counter = response.total;
         getTrackIDs(response);
 
@@ -126,7 +126,7 @@ function allTimeRequest(){
         // console.log(response);
         // console.log("response aaya");
         // console.log("bheja");
-        length = response.total;
+        // length = response.total;
         counter = response.total;
         getTrackIDs(response);
 
@@ -149,7 +149,7 @@ function oneMonthRequest(){
         // console.log(response);
         // console.log("response aaya");
         // console.log("bheja");
-        length = response.total;
+        // length = response.total;
         counter = response.total;
         getTrackIDs(response);
     },
