@@ -199,7 +199,7 @@ function resetEverything(){
   sad=[];
   angry=[];
 
-  length=0
+  // length=0
 
   deferredArr=[];
 
